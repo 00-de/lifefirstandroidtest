@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="
+width=device-width,
+initial-scale=1.0,
+viewport-fit=cover,
+user-scalable=no
+">
+
+<meta
+name="apple-mobile-web-app-capable"
+content="yes">
+
+<meta
+name="mobile-web-app-capable"
+content="yes">
+
+<meta
+name="theme-color"
+content="#ffd6ea">
+
+<title>こころ日記 完全版DX+ Android版</title>
+
+<style>
+
+:root{
+  --baseFont:24px;
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  margin:0;
+
+  padding:
+  env(safe-area-inset-top)
+  16px
+  env(safe-area-inset-bottom)
+  16px;
+
+  min-height:100vh;
+
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  sans-serif;
+
+  font-size:var(--baseFont);
+
+  color:#333;
+
+  transition:0.5s;
+
+  overflow-x:hidden;
+
+}
+
+/* 季節背景 */
+
+.spring{
+  background:
+  linear-gradient(
+    135deg,
+    #ffe3ef,
+    #fff8fb
+  );
+}
+
+.summer{
+  background:
+  linear-gradient(
+    135deg,
+    #d9f6ff,
+    #f0fcff
+  );
+}
+
+.autumn{
+  background:
+  linear-gradient(
+    135deg,
+    #ffe0c1,
+    #fff5e9
+  );
+}
+
+.winter{
+  background:
+  linear-gradient(
+    135deg,
+    #edf5ff,
+    #fafcff
+  );
+}
+
+.container{
+  max-width:760px;
+  margin:auto;
+}
+
+.title{
+
+  text-align:center;
+
+  font-size:2em;
+
+  font-weight:bold;
+
+  color:#ff77aa;
+
+  margin-bottom:20px;
+}
+
+.card{
+
+  background:white;
+
+  border-radius:28px;
+
+  padding:22px;
+
+  margin-bottom:20px;
+
+  box-shadow:
+  0 8px 20px
+  rgba(0,0,0,0.08);
+}
+
+.sectionTitle{
+
+  font-size:1.2em;
+
+  font-weight:bold;
+
+  color:#ff77aa;
+
+  margin-bottom:14px;
+}
+
+.big{
+  font-size:1.4em;
+  font-weight:bold;
+  line-height:1.7;
+}
+
+.time{
+  font-size:1.2em;
+  margin-top:10px;
+}
+
+button{
+
+  width:100%;
+
+  border:none;
+
+  border-radius:22px;
+
+  padding:18px;
+
+  margin:6px 0;
+
+  min-height:72px;
+
+  font-size:1em;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+button:active{
+  transform:scale(0.98);
+}
+
+.mainBtn{
+  background:#7dbef5;
+  color:white;
+}
+
+.menuBtn{
+  background:#ffe0ec;
+}
+
+.voice{
+  background:#c9f7db;
+}
+
+.emergency{
+  background:#ff8f8f;
+  color:white;
+}
+
+textarea,
+input{
+
+  width:100%;
+
+  border:none;
+
+  border-radius:18px;
+
+  padding:16px;
+
+  margin-top:8px;
+  margin-bottom:15px;
+
+  font-size:1em;
+
+  background:#f7f7f7;
+}
+
+textarea{
+  height:110px;
+  resize:none;
+}
+
+.previewBox{
+
+  background:#f7f7f7;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  line-height:1.8;
+
+  margin-top:15px;
+}
+
+.settingPanel{
+
+  max-height:0;
+
+  overflow:hidden;
+
+  opacity:0;
+
+  transition:
+  max-height 0.5s ease,
+  opacity 0.4s ease;
+
+}
+
+.settingPanel.show{
+
+  max-height:5000px;
+
+  opacity:1;
+
+  margin-top:15px;
+}
+
+.message{
+
+  background:#fff4c8;
+
+  border-radius:18px;
+
+  padding:18px;
+
+  line-height:1.9;
+}
+
+.weatherBox{
+  line-height:1.9;
+}
+
+.small{
+  font-size:0.8em;
+  color:#666;
+}
+
+.menuGrid{
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:10px;
+}
+
+.checkArea{
+
+  background:#f7f7f7;
+
+  padding:16px;
+
+  border-radius:18px;
+
+  line-height:2;
+}
+
+@media(max-width:600px){
+
+  .menuGrid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">
+🌸 こころ日記 🌸
+</div>
+
+<!-- 設定 -->
+
+<button
+class="mainBtn"
+onclick="toggleSettings()">
+
+⚙️ 設定画面
+
+</button>
+
+<div
+id="settings"
+class="card settingPanel">
+
+<div class="sectionTitle">
+⚙️ ユーザー設定
+</div>
+
+<input
+id="userName"
+placeholder="名前・あだ名">
+
+<input
+id="userCity"
+placeholder="住んでいる地域">
+
+<input
+type="date"
+id="birthday">
+
+<input
+id="hobby"
+placeholder="趣味">
+
+<input
+id="anniversary"
+placeholder="記念日">
+
+<div class="sectionTitle">
+🚨 緊急連絡先
+</div>
+
+<input
+id="emergency1"
+placeholder="① 名前・電話番号">
+
+<input
+id="emergency2"
+placeholder="② 名前・電話番号">
+
+<input
+id="emergency3"
+placeholder="③ 名前・電話番号">
+
+<input
+id="emergency4"
+placeholder="④ 名前・電話番号">
+
+<input
+id="emergency5"
+placeholder="⑤ 名前・電話番号">
+
+<button
+class="mainBtn"
+onclick="saveSettings()">
+
+💾 保存
+
+</button>
+
+</div>
+
+<!-- 日時 -->
+
+<div class="card">
+
+<div
+id="date"
+class="big">
+</div>
+
+<div
+id="time"
+class="time">
+</div>
+
+<div
+id="weather"
+class="weatherBox">
+
+☁️ 天気取得中...
+
+</div>
+
+<div
+id="weatherUpdate"
+class="small">
+
+最終更新：--
+
+</div>
+
+</div>
+
+<!-- 今日予定 -->
+
+<div class="card">
+
+<div class="sectionTitle">
+🗓️ 今日の予定
+</div>
+
+<div
+id="todaySchedule"
+class="previewBox">
+
+予定はありません😊
+
+</div>
+
+<div class="menuGrid">
+
+<button
+class="menuBtn"
+onclick="toggleTodayItem('💼 仕事')">
+💼 仕事
+</button>
+
+<button
+class="menuBtn"
+onclick="toggleTodayItem('🏥 病院')">
+🏥 病院
+</button>
+
+<button
+class="menuBtn"
+onclick="toggleTodayItem('🛒 買い物')">
+🛒 買い物
+</button>
+
+<button
+class="menuBtn"
+onclick="toggleTodayItem('🎈 遊び')">
+🎈 遊び
+</button>
+
+<button
+class="menuBtn"
+onclick="toggleTodayItem('🎨 趣味')">
+🎨 趣味
+</button>
+
+<button
+class="menuBtn"
+onclick="toggleTodayItem('👥 地域会合')">
+👥 地域会合
+</button>
+
+</div>
+
+</div>
+
+<!-- 明日 -->
+
+<div class="card">
+
+<div class="sectionTitle">
+📅 明日の予定
+</div>
+
+<div
+id="tomorrowPreview"
+class="previewBox">
+
+明日の予定はありません😊
+
+</div>
+
+<div class="menuGrid">
+
+<button
+class="menuBtn"
+onclick="toggleTomorrowItem('💼 仕事')">
+💼 仕事
+</button>
+
+<button
+class="menuBtn"
+onclick="toggleTomorrowItem('🏥 病院')">
+🏥 病院
+</button>
+
+<button
+class="menuBtn"
+onclick="toggleTomorrowItem('🛒 買い物')">
+🛒 買い物
+</button>
+
+<button
+class="menuBtn"
+onclick="toggleTomorrowItem('🎈 遊び')">
+🎈 遊び
+</button>
+
+<button
+class="menuBtn"
+onclick="toggleTomorrowItem('🎨 趣味')">
+🎨 趣味
+</button>
+
+<button
+class="menuBtn"
+onclick="toggleTomorrowItem('👥 地域会合')">
+👥 地域会合
+</button>
+
+</div>
+
+</div>
+
+<!-- DayDream -->
+
+<div class="card">
+
+<div class="sectionTitle">
+💌 DayDreamプラス メッセージ
+</div>
+
+<div
+id="messageArea"
+class="message">
+
+読み込み中...
+
+</div>
+
+<button
+class="voice"
+onclick="readSchedule()">
+
+🔊 今日の予定を読み上げ
+
+</button>
+
+</div>
+
+<!-- メモ -->
+
+<div class="card">
+
+<div class="sectionTitle">
+✍️ 今日の思い出
+</div>
+
+<textarea
+id="memo"
+maxlength="50"
+placeholder="50文字以内">
+</textarea>
+
+<button
+class="mainBtn"
+onclick="saveMemo()">
+
+💾 保存
+
+</button>
+
+</div>
+
+<!-- お薬 -->
+
+<div class="card">
+
+<div class="sectionTitle">
+💊 お薬チェック
+</div>
+
+<div class="checkArea">
+
+<label>
+<input type="checkbox" id="morning">
+朝
+</label>
+
+<br>
+
+<label>
+<input type="checkbox" id="noon">
+昼
+</label>
+
+<br>
+
+<label>
+<input type="checkbox" id="night">
+夜
+</label>
+
+</div>
+
+</div>
+
+<!-- 緊急 -->
+
+<div class="card">
+
+<div class="sectionTitle">
+🚨 緊急連絡先
+</div>
+
+<button
+class="emergency"
+onclick="showEmergencyContacts()">
+
+📞 緊急連絡先を見る
+
+</button>
+
+<div
+id="emergencyList"
+class="previewBox"
+style="display:none;">
+
+未設定です😊
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* 設定 */
+
+function toggleSettings(){
+
+  settings.classList.toggle(
+    "show"
+  );
+
+}
+
+function saveSettings(){
+
+  const data = {
+
+    name:userName.value,
+    city:userCity.value,
+    birthday:birthday.value,
+    hobby:hobby.value,
+    anniversary:anniversary.value,
+
+    emergency1:emergency1.value,
+    emergency2:emergency2.value,
+    emergency3:emergency3.value,
+    emergency4:emergency4.value,
+    emergency5:emergency5.value
+
+  };
+
+  localStorage.setItem(
+    "kokoroSettings",
+    JSON.stringify(data)
+  );
+
+  alert("保存しました😊");
+
+}
+
+function loadSettings(){
+
+  const data =
+
+  JSON.parse(
+
+    localStorage.getItem(
+      "kokoroSettings"
+    ) || "{}"
+
+  );
+
+  userName.value =
+  data.name || "";
+
+  userCity.value =
+  data.city || "";
+
+  birthday.value =
+  data.birthday || "";
+
+  hobby.value =
+  data.hobby || "";
+
+  anniversary.value =
+  data.anniversary || "";
+
+  emergency1.value =
+  data.emergency1 || "";
+
+  emergency2.value =
+  data.emergency2 || "";
+
+  emergency3.value =
+  data.emergency3 || "";
+
+  emergency4.value =
+  data.emergency4 || "";
+
+  emergency5.value =
+  data.emergency5 || "";
+
+}
+
+loadSettings();
+
+/* 日時 */
+
+function updateDateTime(){
+
+  const now =
+  new Date();
+
+  const week = [
+
+    "日曜日",
+    "月曜日",
+    "火曜日",
+    "水曜日",
+    "木曜日",
+    "金曜日",
+    "土曜日"
+
+  ];
+
+  let hour =
+  now.getHours();
+
+  const minute =
+  String(
+    now.getMinutes()
+  ).padStart(2,"0");
+
+  const ampm =
+  hour >= 12
+  ? "午後"
+  : "午前";
+
+  hour =
+  hour % 12;
+
+  if(hour === 0){
+    hour = 12;
+  }
+
+  date.innerHTML =
+
+  `📅 ${now.getFullYear()}年
+  ${now.getMonth()+1}月
+  ${now.getDate()}日
+  ${week[now.getDay()]}`;
+
+  time.innerHTML =
+  `🕒 ${ampm}${hour}時${minute}分`;
+
+}
+
+setInterval(
+  updateDateTime,
+  1000
+);
+
+updateDateTime();
+
+/* 季節背景 */
+
+function setSeason(){
+
+  const month =
+  new Date().getMonth()+1;
+
+  document.body.className="";
+
+  if(month>=3 && month<=5){
+
+    document.body.classList.add(
+      "spring"
+    );
+
+  }else if(month>=6 && month<=8){
+
+    document.body.classList.add(
+      "summer"
+    );
+
+  }else if(month>=9 && month<=11){
+
+    document.body.classList.add(
+      "autumn"
+    );
+
+  }else{
+
+    document.body.classList.add(
+      "winter"
+    );
+
+  }
+
+}
+
+setSeason();
+
+/* 天気 */
+
+function translateWeather(text){
+
+  const map = {
+
+    "Sunny":"晴れ ☀️",
+    "Clear":"快晴 ☀️",
+    "Partly cloudy":"くもり時々晴れ ⛅",
+    "Cloudy":"くもり ☁️",
+    "Overcast":"厚いくもり ☁️",
+    "Mist":"霧 🌫️",
+    "Patchy rain nearby":"近くで雨 ☔",
+    "Light rain":"小雨 ☔",
+    "Moderate rain":"雨 ☔",
+    "Heavy rain":"大雨 ☔",
+    "Light snow":"小雪 ❄️",
+    "Heavy snow":"大雪 ❄️"
+
+  };
+
+  return map[text] || text;
+
+}
+
+async function getWeather(){
+
+  try{
+
+    const res =
+    await fetch(
+      "https://wttr.in/?format=j1"
+    );
+
+    const data =
+    await res.json();
+
+    const current =
+    data.current_condition[0];
+
+    const today =
+    data.weather[0];
+
+    weather.innerHTML = `
+
+    ⛅ ${
+      translateWeather(
+        current.weatherDesc[0].value
+      )
+    }
+
+    <br><br>
+
+    🌡️ 現在：
+    ${current.temp_C}℃
+
+    <br><br>
+
+    🔥 最高気温：
+    ${today.maxtempC}℃
+
+    <br><br>
+
+    ❄️ 最低気温：
+    ${today.mintempC}℃
+
+    `;
+
+    weatherUpdate.innerHTML =
+    "最終更新：" +
+    new Date().toLocaleTimeString(
+      "ja-JP"
+    );
+
+  }catch(e){
+
+    weather.innerHTML =
+    "⚠️ 天気取得失敗";
+
+  }
+
+}
+
+getWeather();
+
+/* 今日予定 */
+
+function showTodaySchedule(){
+
+  const today =
+
+  JSON.parse(
+
+    localStorage.getItem(
+      "todaySchedules"
+    ) || "[]"
+
+  );
+
+  todaySchedule.innerHTML =
+
+  today.length
+
+  ?
+
+  today.map(s =>
+    `・${s}`
+  ).join("<br>")
+
+  :
+
+  "予定はありません😊";
+
+}
+
+function toggleTodayItem(text){
+
+  let schedules =
+
+  JSON.parse(
+
+    localStorage.getItem(
+      "todaySchedules"
+    ) || "[]"
+
+  );
+
+  if(schedules.includes(text)){
+
+    schedules =
+    schedules.filter(
+      s => s !== text
+    );
+
+  }else{
+
+    schedules.push(text);
+
+  }
+
+  localStorage.setItem(
+    "todaySchedules",
+    JSON.stringify(schedules)
+  );
+
+  showTodaySchedule();
+
+}
+
+showTodaySchedule();
+
+/* 明日 */
+
+function showTomorrowPreview(){
+
+  const tomorrow =
+
+  JSON.parse(
+
+    localStorage.getItem(
+      "tomorrowSchedules"
+    ) || "[]"
+
+  );
+
+  tomorrowPreview.innerHTML =
+
+  tomorrow.length
+
+  ?
+
+  tomorrow.map(s =>
+    `・${s}`
+  ).join("<br>")
+
+  :
+
+  "明日の予定はありません😊";
+
+}
+
+function toggleTomorrowItem(text){
+
+  let schedules =
+
+  JSON.parse(
+
+    localStorage.getItem(
+      "tomorrowSchedules"
+    ) || "[]"
+
+  );
+
+  if(schedules.includes(text)){
+
+    schedules =
+    schedules.filter(
+      s => s !== text
+    );
+
+  }else{
+
+    schedules.push(text);
+
+  }
+
+  localStorage.setItem(
+    "tomorrowSchedules",
+    JSON.stringify(schedules)
+  );
+
+  showTomorrowPreview();
+
+}
+
+showTomorrowPreview();
+
+/* メモ */
+
+memo.value =
+localStorage.getItem(
+  "memo"
+) || "";
+
+function saveMemo(){
+
+  localStorage.setItem(
+    "memo",
+    memo.value
+  );
+
+  alert("保存しました😊");
+
+}
+
+/* お薬 */
+
+function saveMedicine(){
+
+  const data = {
+
+    morning:
+    morning.checked,
+
+    noon:
+    noon.checked,
+
+    night:
+    night.checked
+
+  };
+
+  localStorage.setItem(
+    "medicine",
+    JSON.stringify(data)
+  );
+
+}
+
+function loadMedicine(){
+
+  const data =
+
+  JSON.parse(
+
+    localStorage.getItem(
+      "medicine"
+    ) || "{}"
+
+  );
+
+  morning.checked =
+  data.morning || false;
+
+  noon.checked =
+  data.noon || false;
+
+  night.checked =
+  data.night || false;
+
+}
+
+loadMedicine();
+
+document
+.querySelectorAll(
+  "input[type='checkbox']"
+)
+.forEach(el => {
+
+  el.addEventListener(
+    "change",
+    saveMedicine
+  );
+
+});
+
+/* 音声 */
+
+function readSchedule(){
+
+  const schedules =
+
+  JSON.parse(
+
+    localStorage.getItem(
+      "todaySchedules"
+    ) || "[]"
+
+  );
+
+  let text =
+
+  schedules.length
+
+  ?
+
+  "今日の予定を読み上げます。" +
+  schedules.join("。")
+
+  :
+
+  "今日の予定はありません";
+
+  const speech =
+  new SpeechSynthesisUtterance(
+    text
+  );
+
+  speech.lang = "ja-JP";
+
+  speech.rate = 0.9;
+
+  speechSynthesis.cancel();
+
+  speechSynthesis.speak(
+    speech
+  );
+
+}
+
+/* 緊急 */
+
+let emergencyOpen = false;
+
+function showEmergencyContacts(){
+
+  const data =
+
+  JSON.parse(
+
+    localStorage.getItem(
+      "kokoroSettings"
+    ) || "{}"
+
+  );
+
+  let html = "";
+
+  for(let i=1;i<=5;i++){
+
+    const value =
+    data["emergency"+i];
+
+    if(value){
+
+      html += `
+
+      <div style="
+      background:#fff4c8;
+      padding:14px;
+      border-radius:16px;
+      margin-bottom:10px;
+      ">
+
+      📞 ${value}
+
+      </div>
+
+      `;
+
+    }
+
+  }
+
+  if(html===""){
+
+    html="未設定です😊";
+
+  }
+
+  if(emergencyOpen){
+
+    emergencyList.style.display =
+    "none";
+
+    emergencyOpen = false;
+
+    return;
+
+  }
+
+  emergencyList.innerHTML =
+  html;
+
+  emergencyList.style.display =
+  "block";
+
+  emergencyOpen = true;
+
+}
+
+/* DayDream */
+
+const members = [
+
+"🌸 悠真",
+"🎀 葵",
+"🎸 蓮",
+"🎤 結衣",
+"🥁 大地"
+
+];
+
+const greetings = [
+
+"今日もゆっくりいこう😊",
+"無理しすぎないでね✨",
+"ちゃんと休憩も大事だよ☕",
+"今日も応援してるよ🌈",
+"マイペースで大丈夫🌸",
+"頑張っててえらいよ✨",
+"少しずつで大丈夫😊",
+"いっぱい応援してるよ🎶",
+"焦らなくて大丈夫🌸",
+"今日はいい日になるよ☀️"
+
+];
+
+const timeMessages = [
+
+"朝はゆっくりスタート☀️",
+"お昼も無理しないでね🍙",
+"夜はゆっくり休もう🌙",
+"深夜は暖かくしてね✨",
+"水分補給忘れずに🥤"
+
+];
+
+const seasonMessages = [
+
+"春の空気気持ちいいね🌸",
+"夏バテ気をつけてね☀️",
+"秋の景色綺麗だね🍁",
+"冬は暖かくしてね❄️",
+"今日の空も綺麗だね☁️"
+
+];
+
+function randomItem(arr){
+
+  return arr[
+    Math.floor(
+      Math.random()
+      * arr.length
+    )
+  ];
+
+}
+
+function generateMessage(){
+
+  const message = `
+
+  ${randomItem(members)}より💌
+
+  <br><br>
+
+  ${randomItem(greetings)}
+
+  <br><br>
+
+  ${randomItem(timeMessages)}
+
+  <br><br>
+
+  ${randomItem(seasonMessages)}
+
+  `;
+
+  messageArea.innerHTML =
+  message;
+
+}
+
+generateMessage();
+
+setInterval(
+  generateMessage,
+  30000
+);
+
+/* 振動 */
+
+function vibratePhone(){
+
+  if(navigator.vibrate){
+
+    navigator.vibrate(40);
+
+  }
+
+}
+
+document
+.querySelectorAll("button")
+.forEach(btn=>{
+
+  btn.addEventListener(
+    "click",
+    vibratePhone
+  );
+
+});
+
+</script>
+
+</body>
+</html>
