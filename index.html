@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-
 <meta charset="UTF-8">
 
 <meta
 name="viewport"
-content="
-width=device-width,
-initial-scale=1.0,
-viewport-fit=cover,
-user-scalable=no
-">
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
-<meta
-name="apple-mobile-web-app-capable"
-content="yes">
+<meta name="theme-color" content="#ffd9ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-status-bar-style" content="default">
 
-<meta
-name="mobile-web-app-capable"
-content="yes">
-
-<meta
-name="theme-color"
-content="#ffd6ea">
-
-<title>こころ日記 完全版DX+ Android版</title>
+<title>DayDreamプラス Life 超らくらく版</title>
 
 <style>
 
 :root{
-  --baseFont:24px;
+  --bg1:#fff6fb;
+  --bg2:#eef7ff;
+  --card:#ffffff;
+  --text:#2f2f2f;
+  --accent:#ff7fb0;
+  --sub:#6b7c95;
+  --shadow:0 6px 18px rgba(0,0,0,0.08);
+  --fontSize:30px;
+  --radius:26px;
+  --btnRadius:22px;
 }
 
 *{
@@ -38,1333 +34,2155 @@ content="#ffd6ea">
   -webkit-tap-highlight-color:transparent;
 }
 
-html{
-  scroll-behavior:smooth;
+html,body{
+  width:100%;
+  overflow-x:hidden;
 }
 
 body{
-
   margin:0;
-
-  padding:
-  env(safe-area-inset-top)
-  16px
-  env(safe-area-inset-bottom)
-  16px;
-
-  min-height:100vh;
-
   font-family:
   -apple-system,
   BlinkMacSystemFont,
+  "Hiragino Sans",
+  "Yu Gothic",
   sans-serif;
-
-  font-size:var(--baseFont);
-
-  color:#333;
-
-  transition:0.5s;
-
-  overflow-x:hidden;
-
-}
-
-/* 季節背景 */
-
-.spring{
-  background:
-  linear-gradient(
-    135deg,
-    #ffe3ef,
-    #fff8fb
-  );
-}
-
-.summer{
-  background:
-  linear-gradient(
-    135deg,
-    #d9f6ff,
-    #f0fcff
-  );
-}
-
-.autumn{
-  background:
-  linear-gradient(
-    135deg,
-    #ffe0c1,
-    #fff5e9
-  );
-}
-
-.winter{
-  background:
-  linear-gradient(
-    135deg,
-    #edf5ff,
-    #fafcff
-  );
-}
-
-.container{
-  max-width:760px;
-  margin:auto;
-}
-
-.title{
-
-  text-align:center;
-
-  font-size:2em;
-
-  font-weight:bold;
-
-  color:#ff77aa;
-
-  margin-bottom:20px;
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+  font-size:var(--fontSize);
+  line-height:1.8;
+  padding:
+    env(safe-area-inset-top)
+    14px
+    calc(120px + env(safe-area-inset-bottom))
+    14px;
 }
 
 .card{
-
-  background:white;
-
-  border-radius:28px;
-
-  padding:22px;
-
-  margin-bottom:20px;
-
-  box-shadow:
-  0 8px 20px
-  rgba(0,0,0,0.08);
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:20px 16px;
+  margin-bottom:18px;
+  box-shadow:var(--shadow);
 }
 
-.sectionTitle{
-
+.title{
   font-size:1.2em;
-
   font-weight:bold;
+  text-align:center;
+  margin-bottom:14px;
+  line-height:1.6;
+}
 
-  color:#ff77aa;
+.subText{
+  text-align:center;
+  color:#666;
+  font-size:0.9em;
+  line-height:1.8;
+  margin-top:10px;
+}
 
+.bigDate{
+  font-size:1.08em;
+  font-weight:bold;
+  text-align:center;
+  line-height:1.8;
+}
+
+.time{
+  font-size:1.95em;
+  font-weight:bold;
+  color:var(--accent);
+  text-align:center;
+  line-height:1.4;
+}
+
+.btn{
+  width:100%;
+  min-height:72px;
+  border:none;
+  border-radius:var(--btnRadius);
+  padding:18px 16px;
+  font-size:1em;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:12px;
+  line-height:1.5;
+}
+
+.btn:active{
+  transform:scale(0.98);
+}
+
+.btnPrimary{
+  background:#ffd8e9;
+  color:#7a3d57;
+}
+
+.btnSub{
+  background:#eef4ff;
+  color:#4e6284;
+}
+
+.btnSoft{
+  background:#fff2f8;
+  color:#7d5670;
+}
+
+.btnDanger{
+  background:#ffe5e5;
+  color:#a24d4d;
+}
+
+.bigRoundBtn{
+  width:100%;
+  min-height:78px;
+  border:none;
+  border-radius:24px;
+  padding:18px 14px;
+  font-size:1em;
+  font-weight:bold;
+  background:#eef4ff;
+  color:#445a78;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+.bigRoundBtn:active{
+  transform:scale(0.98);
+}
+
+.todayAgendaCard{
+  background:linear-gradient(180deg,#fff0f7,#ffffff);
+  border:2px solid #ffc7de;
+}
+
+.todayAgendaDate{
+  text-align:center;
+  color:#b45c83;
+  font-weight:bold;
+  margin-bottom:10px;
+  line-height:1.7;
+}
+
+.todayAgendaSummary{
+  text-align:center;
+  margin-bottom:12px;
+}
+
+.todayAgendaCount{
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:999px;
+  background:#ff7fb0;
+  color:#fff;
+  font-weight:bold;
+  font-size:0.9em;
+}
+
+.todayAgendaList{
+  display:block;
+}
+
+.todayAgendaEmpty{
+  background:#fff;
+  border-radius:22px;
+  padding:20px;
+  text-align:center;
+  color:#777;
+  line-height:1.9;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.todayAgendaItem{
+  background:#fff;
+  border-radius:20px;
+  padding:16px;
+  margin-bottom:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  border-left:8px solid #ccc;
+}
+
+.todayAgendaTop{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.todayAgendaTitle{
+  font-size:1em;
+  font-weight:bold;
+  line-height:1.8;
+}
+
+.todayAgendaMemo{
+  margin-top:8px;
+  color:#666;
+  line-height:1.8;
+  font-size:0.9em;
+  white-space:pre-wrap;
+}
+
+.weather{
+  text-align:center;
+  line-height:1.9;
+}
+
+.weatherIcon{
+  font-size:2.1em;
+}
+
+.check{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:16px 0;
+  line-height:1.8;
+}
+
+input[type="checkbox"]{
+  width:38px;
+  height:38px;
+  flex-shrink:0;
+}
+
+input,select,textarea{
+  width:100%;
+  min-height:66px;
+  padding:18px 16px;
+  margin-top:10px;
+  margin-bottom:16px;
+  border-radius:18px;
+  border:1px solid #ddd;
+  font-size:1em;
+  font-family:inherit;
+  background:#fff;
+}
+
+textarea{
+  min-height:140px;
+  resize:vertical;
+}
+
+.moodGrid{
+  display:block;
+}
+
+.moodBtn{
+  width:100%;
+  min-height:72px;
+  border:none;
+  border-radius:22px;
+  padding:18px 16px;
+  font-size:1em;
+  font-weight:bold;
+  background:#eef4ff;
+  color:#425b7a;
+  margin-bottom:10px;
+  cursor:pointer;
+}
+
+.message{
+  line-height:1.9;
+  font-weight:bold;
+  color:#ff6699;
+}
+
+.member{
+  margin-top:12px;
+  padding:14px;
+  border-radius:18px;
+  background:#fff7fb;
+}
+
+.settings{
+  position:fixed;
+  right:16px;
+  bottom:18px;
+  width:88px;
+  height:88px;
+  border:none;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  font-size:32px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  z-index:60;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+  padding:12px;
+}
+
+.modalContent{
+  width:100%;
+  max-width:760px;
+  max-height:88vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:24px;
+  padding:18px;
+}
+
+.fontButtons{
+  display:block;
+}
+
+.calendarHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
   margin-bottom:14px;
 }
 
-.big{
-  font-size:1.4em;
+.calendarTitle{
+  flex:1;
+  text-align:center;
+  font-weight:bold;
+  line-height:1.6;
+}
+
+.miniBtn{
+  border:none;
+  border-radius:16px;
+  min-width:72px;
+  min-height:58px;
+  padding:12px 14px;
+  background:#ffe1ef;
+  color:#444;
+  font-size:0.92em;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.calendarWeek{
+  display:flex;
+  gap:4px;
+  margin-bottom:8px;
+}
+
+.calendarWeek div{
+  width:14.285%;
+  text-align:center;
+  color:#888;
+  font-weight:bold;
+  font-size:0.72em;
+  line-height:1.4;
+  padding:6px 0;
+}
+
+.calendarGrid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+}
+
+.calendarCell{
+  width:calc((100% - 24px) / 7);
+  min-height:92px;
+  background:#fff7fb;
+  border-radius:16px;
+  padding:6px 5px 8px 5px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.04);
+  cursor:pointer;
+  overflow:hidden;
+}
+
+.calendarCell.empty{
+  background:transparent;
+  box-shadow:none;
+  cursor:default;
+}
+
+.calendarCell.today{
+  background:linear-gradient(180deg,#ff7fb0,#ff96bf);
+  color:#fff;
+  font-weight:bold;
+}
+
+.calendarCell.hasEvent{
+  background:linear-gradient(180deg,#fff0f7,#ffe5f0);
+  border:2px solid #ff9dc4;
+}
+
+.calendarCell.today.hasEvent{
+  background:linear-gradient(180deg,#ff5d9a,#ff89b7);
+  border:2px solid rgba(255,255,255,0.95);
+}
+
+.dateNum{
+  text-align:right;
+  font-weight:bold;
+  font-size:0.8em;
+  line-height:1.2;
+}
+
+.eventCount{
+  display:inline-block;
+  margin-top:4px;
+  font-size:0.48em;
+  line-height:1;
+  padding:4px 7px;
+  border-radius:999px;
+  background:#fff;
+  color:#ff6699;
+  font-weight:bold;
+}
+
+.calendarCell.today .eventCount{
+  background:rgba(255,255,255,0.22);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.45);
+}
+
+.eventLine{
+  font-size:0.48em;
+  line-height:1.35;
+  margin-top:5px;
+  width:100%;
+  padding-left:5px;
+  border-left:4px solid #ccc;
+  color:#555;
+  word-break:break-word;
+  max-height:2.8em;
+  overflow:hidden;
+}
+
+.calendarCell.today .eventLine{
+  color:#fff;
+  border-left-color:rgba(255,255,255,0.95);
+}
+
+.moreLine{
+  font-size:0.46em;
+  margin-top:4px;
+  color:#777;
+  font-weight:bold;
+}
+
+.calendarCell.today .moreLine{
+  color:#fff;
+}
+
+.cat-hospital{ background:#ff7f9d; }
+.cat-shopping{ background:#ffb14a; }
+.cat-medicine{ background:#5aa7ff; }
+.cat-anniversary{ background:#b07cff; }
+.cat-other{ background:#7f96a8; }
+
+.border-hospital{ border-left-color:#ff7f9d; }
+.border-shopping{ border-left-color:#ffb14a; }
+.border-medicine{ border-left-color:#5aa7ff; }
+.border-anniversary{ border-left-color:#b07cff; }
+.border-other{ border-left-color:#7f96a8; }
+
+.selectedDateLabel{
+  text-align:center;
+  font-weight:bold;
+  color:#ff6699;
+  margin-bottom:10px;
+  line-height:1.7;
+}
+
+.sectionLabel{
+  font-weight:bold;
+  color:#666;
+  margin:12px 0 8px 0;
+}
+
+.scheduleList{
+  margin-bottom:16px;
+}
+
+.emptySchedule{
+  background:#fafafa;
+  border-radius:18px;
+  padding:14px;
+  text-align:center;
+  color:#888;
+  line-height:1.8;
+}
+
+.scheduleItem{
+  background:#fff7fb;
+  border-radius:18px;
+  padding:14px;
+  margin-bottom:10px;
+  border:2px solid rgba(255,127,176,0.12);
+}
+
+.scheduleMeta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+.categoryBadge{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:999px;
+  color:#fff;
+  font-size:0.78em;
+  font-weight:bold;
+}
+
+.timeBadge{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#f1f4f8;
+  color:#555;
+  font-size:0.78em;
+  font-weight:bold;
+}
+
+.scheduleText{
+  margin-top:8px;
+  font-weight:bold;
+  line-height:1.8;
+}
+
+.scheduleMemo{
+  margin-top:8px;
+  color:#666;
+  line-height:1.8;
+  font-size:0.9em;
+  white-space:pre-wrap;
+}
+
+.readOnlyNote{
+  margin-top:8px;
+  color:#8a74c9;
+  font-size:0.86em;
+  line-height:1.7;
+}
+
+.itemActionButtons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+
+.smallBtn{
+  border:none;
+  border-radius:14px;
+  padding:12px 14px;
+  min-height:50px;
+  cursor:pointer;
+  font-size:0.86em;
+  font-weight:bold;
+}
+
+.editSmallBtn{
+  background:#e8f0ff;
+  color:#41618d;
+}
+
+.deleteSmallBtn{
+  background:#ffe4ec;
+  color:#a44;
+}
+
+.formModeBox{
+  margin-top:8px;
+  margin-bottom:10px;
+  padding:12px 14px;
+  border-radius:16px;
+  background:#fff3f8;
+  color:#a25677;
   font-weight:bold;
   line-height:1.7;
 }
 
-.time{
-  font-size:1.2em;
+.quizCard{
+  background:linear-gradient(180deg,#f7f7ff,#ffffff);
+  border:2px solid #cfd6ff;
+}
+
+.quizStatus{
+  text-align:center;
+  color:#6a72b8;
+  font-weight:bold;
+  margin-bottom:12px;
+  line-height:1.8;
+}
+
+.quizQuestion{
+  font-size:1.02em;
+  font-weight:bold;
+  line-height:1.8;
+  margin-bottom:14px;
+  text-align:center;
+}
+
+.quizChoices{
+  display:block;
+}
+
+.quizChoiceBtn{
+  width:100%;
+  min-height:72px;
+  border:none;
+  border-radius:22px;
+  padding:18px 16px;
+  background:#eef1ff;
+  color:#394b74;
+  font-size:1em;
+  font-weight:bold;
+  cursor:pointer;
+  text-align:left;
+  line-height:1.7;
+  margin-bottom:10px;
+}
+
+.quizChoiceBtn.correct{
+  background:#dff6e8;
+  color:#236847;
+}
+
+.quizChoiceBtn.wrong{
+  background:#ffe5ea;
+  color:#a44;
+}
+
+.quizResult{
+  min-height:2.2em;
+  margin-top:14px;
+  text-align:center;
+  font-weight:bold;
+  line-height:1.8;
+}
+
+.quizSource{
+  text-align:center;
+  color:#777;
+  font-size:0.8em;
+  margin-top:10px;
+  line-height:1.7;
+  word-break:break-all;
+}
+
+.quickMenu{
+  display:block;
+}
+
+.quickMenu .btn{
   margin-top:10px;
 }
 
-button{
-
-  width:100%;
-
-  border:none;
-
-  border-radius:22px;
-
-  padding:18px;
-
-  margin:6px 0;
-
-  min-height:72px;
-
-  font-size:1em;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
-  transition:0.2s;
-}
-
-button:active{
-  transform:scale(0.98);
-}
-
-.mainBtn{
-  background:#7dbef5;
-  color:white;
-}
-
-.menuBtn{
-  background:#ffe0ec;
-}
-
-.voice{
-  background:#c9f7db;
-}
-
-.emergency{
-  background:#ff8f8f;
-  color:white;
-}
-
-textarea,
-input{
-
-  width:100%;
-
-  border:none;
-
-  border-radius:18px;
-
-  padding:16px;
-
-  margin-top:8px;
-  margin-bottom:15px;
-
-  font-size:1em;
-
-  background:#f7f7f7;
-}
-
-textarea{
-  height:110px;
-  resize:none;
-}
-
-.previewBox{
-
-  background:#f7f7f7;
-
-  padding:18px;
-
-  border-radius:18px;
-
+.topNotice{
+  text-align:center;
+  color:#6d6d6d;
+  font-size:0.88em;
   line-height:1.8;
-
-  margin-top:15px;
 }
 
-.settingPanel{
-
-  max-height:0;
-
-  overflow:hidden;
-
-  opacity:0;
-
-  transition:
-  max-height 0.5s ease,
-  opacity 0.4s ease;
-
+.footerSpace{
+  height:80px;
 }
 
-.settingPanel.show{
-
-  max-height:5000px;
-
-  opacity:1;
-
-  margin-top:15px;
-}
-
-.message{
-
-  background:#fff4c8;
-
-  border-radius:18px;
-
-  padding:18px;
-
-  line-height:1.9;
-}
-
-.weatherBox{
-  line-height:1.9;
-}
-
-.small{
-  font-size:0.8em;
-  color:#666;
-}
-
-.menuGrid{
-
-  display:grid;
-
-  grid-template-columns:
-  1fr 1fr;
-
-  gap:10px;
-}
-
-.checkArea{
-
-  background:#f7f7f7;
-
-  padding:16px;
-
-  border-radius:18px;
-
-  line-height:2;
-}
-
-@media(max-width:600px){
-
-  .menuGrid{
-    grid-template-columns:1fr;
+@media (max-width:600px){
+  :root{
+    --fontSize:28px;
   }
 
+  .calendarCell{
+    min-height:84px;
+  }
+
+  .settings{
+    width:82px;
+    height:82px;
+    font-size:30px;
+  }
 }
 
 </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<div class="title">
-🌸 こころ日記 🌸
+<div class="card">
+  <div class="title">🌸 DayDreamプラス Life 超らくらく版</div>
+  <div class="bigDate" id="date"></div>
+  <div class="time" id="time"></div>
+  <div class="topNotice">
+    文字が小さい時は右下の⚙️から大きくできます
+  </div>
 </div>
-
-<!-- 設定 -->
-
-<button
-class="mainBtn"
-onclick="toggleSettings()">
-
-⚙️ 設定画面
-
-</button>
-
-<div
-id="settings"
-class="card settingPanel">
-
-<div class="sectionTitle">
-⚙️ ユーザー設定
-</div>
-
-<input
-id="userName"
-placeholder="名前・あだ名">
-
-<input
-id="userCity"
-placeholder="住んでいる地域">
-
-<input
-type="date"
-id="birthday">
-
-<input
-id="hobby"
-placeholder="趣味">
-
-<input
-id="anniversary"
-placeholder="記念日">
-
-<div class="sectionTitle">
-🚨 緊急連絡先
-</div>
-
-<input
-id="emergency1"
-placeholder="① 名前・電話番号">
-
-<input
-id="emergency2"
-placeholder="② 名前・電話番号">
-
-<input
-id="emergency3"
-placeholder="③ 名前・電話番号">
-
-<input
-id="emergency4"
-placeholder="④ 名前・電話番号">
-
-<input
-id="emergency5"
-placeholder="⑤ 名前・電話番号">
-
-<button
-class="mainBtn"
-onclick="saveSettings()">
-
-💾 保存
-
-</button>
-
-</div>
-
-<!-- 日時 -->
 
 <div class="card">
-
-<div
-id="date"
-class="big">
+  <div class="title">⚡ かんたんメニュー</div>
+  <div class="quickMenu">
+    <button class="btn btnPrimary" onclick="scrollToCard('weatherCard')">☀️ 天気を見る</button>
+    <button class="btn btnPrimary" onclick="scrollToCard('quizCard')">🇯🇵 日本クイズ</button>
+    <button class="btn btnPrimary" onclick="scrollToCard('calendarCard')">📅 予定を見る</button>
+    <button class="btn btnPrimary" onclick="scrollToCard('medicineCard')">💊 薬チェック</button>
+  </div>
 </div>
 
-<div
-id="time"
-class="time">
+<div class="card todayAgendaCard" id="todayAgendaCard">
+  <div class="title">🌟 今日の予定</div>
+  <div class="todayAgendaDate" id="todayAgendaDate"></div>
+  <div class="todayAgendaSummary" id="todayAgendaSummary"></div>
+  <div class="todayAgendaList" id="todayAgendaContent"></div>
 </div>
 
-<div
-id="weather"
-class="weatherBox">
-
-☁️ 天気取得中...
-
+<div class="card weather" id="weatherCard">
+  <div class="title">☀️ 今日の天気</div>
+  <div class="weatherIcon" id="weatherIcon">📍</div>
+  <div id="weatherText">現在地の天気を取得しています...</div>
+  <button class="btn btnSub" onclick="loadWeatherByGPS()">
+    現在地の天気を再取得
+  </button>
 </div>
 
-<div
-id="weatherUpdate"
-class="small">
-
-最終更新：--
-
+<div class="card quizCard" id="quizCard">
+  <div class="title">🇯🇵 日本の国クイズ</div>
+  <div class="quizStatus" id="quizStatus">インターネットから日本データを取得します...</div>
+  <div class="quizQuestion" id="quizQuestion">読み込み中です...</div>
+  <div class="quizChoices" id="quizChoices"></div>
+  <div class="quizResult" id="quizResult"></div>
+  <button class="btn btnPrimary" id="nextQuizBtn" onclick="nextJapanQuiz()" style="display:none;">
+    次の問題へ
+  </button>
+  <button class="btn btnSub" onclick="loadJapanQuiz()">
+    日本クイズを再取得
+  </button>
+  <div class="quizSource" id="quizSource"></div>
 </div>
 
+<div class="card" id="calendarCard">
+  <div class="title">📅 カレンダー</div>
+
+  <div class="calendarHeader">
+    <button class="miniBtn" onclick="changeMonth(-1)">←</button>
+    <div class="calendarTitle" id="calendarTitle"></div>
+    <button class="miniBtn" onclick="changeMonth(1)">→</button>
+  </div>
+
+  <div class="calendarWeek">
+    <div>日</div>
+    <div>月</div>
+    <div>火</div>
+    <div>水</div>
+    <div>木</div>
+    <div>金</div>
+    <div>土</div>
+  </div>
+
+  <div class="calendarGrid" id="calendar"></div>
+
+  <div class="subText">
+    日付を押すと、その日の予定を追加・編集・削除できます
+  </div>
 </div>
 
-<!-- 今日予定 -->
+<div class="card" id="medicineCard">
+  <div class="title">💊 薬チェック</div>
+
+  <label class="check">
+    <input type="checkbox" id="morning">
+    朝の薬
+  </label>
+
+  <label class="check">
+    <input type="checkbox" id="noon">
+    昼の薬
+  </label>
+
+  <label class="check">
+    <input type="checkbox" id="night">
+    夜の薬
+  </label>
+
+  <button class="btn btnSoft" onclick="resetMedicineChecks()">
+    薬チェックを全部もどす
+  </button>
+</div>
 
 <div class="card">
+  <div class="title">😊 今日の気分</div>
 
-<div class="sectionTitle">
-🗓️ 今日の予定
+  <div class="moodGrid">
+    <button class="moodBtn" onclick="setMood('😊 元気')">😊 元気</button>
+    <button class="moodBtn" onclick="setMood('🙂 普通')">🙂 普通</button>
+    <button class="moodBtn" onclick="setMood('😢 疲れた')">😢 疲れた</button>
+    <button class="moodBtn" onclick="setMood('😴 眠い')">😴 眠い</button>
+  </div>
+
+  <div class="subText" id="moodText">まだ気分は保存されていません</div>
 </div>
-
-<div
-id="todaySchedule"
-class="previewBox">
-
-予定はありません😊
-
-</div>
-
-<div class="menuGrid">
-
-<button
-class="menuBtn"
-onclick="toggleTodayItem('💼 仕事')">
-💼 仕事
-</button>
-
-<button
-class="menuBtn"
-onclick="toggleTodayItem('🏥 病院')">
-🏥 病院
-</button>
-
-<button
-class="menuBtn"
-onclick="toggleTodayItem('🛒 買い物')">
-🛒 買い物
-</button>
-
-<button
-class="menuBtn"
-onclick="toggleTodayItem('🎈 遊び')">
-🎈 遊び
-</button>
-
-<button
-class="menuBtn"
-onclick="toggleTodayItem('🎨 趣味')">
-🎨 趣味
-</button>
-
-<button
-class="menuBtn"
-onclick="toggleTodayItem('👥 地域会合')">
-👥 地域会合
-</button>
-
-</div>
-
-</div>
-
-<!-- 明日 -->
 
 <div class="card">
-
-<div class="sectionTitle">
-📅 明日の予定
+  <div class="title">🌈 DayDreamメッセージ</div>
+  <div class="member">
+    <div class="message" id="messageArea"></div>
+  </div>
+  <button class="btn btnSoft" onclick="randomMessage()">
+    メッセージを変える
+  </button>
 </div>
-
-<div
-id="tomorrowPreview"
-class="previewBox">
-
-明日の予定はありません😊
-
-</div>
-
-<div class="menuGrid">
-
-<button
-class="menuBtn"
-onclick="toggleTomorrowItem('💼 仕事')">
-💼 仕事
-</button>
-
-<button
-class="menuBtn"
-onclick="toggleTomorrowItem('🏥 病院')">
-🏥 病院
-</button>
-
-<button
-class="menuBtn"
-onclick="toggleTomorrowItem('🛒 買い物')">
-🛒 買い物
-</button>
-
-<button
-class="menuBtn"
-onclick="toggleTomorrowItem('🎈 遊び')">
-🎈 遊び
-</button>
-
-<button
-class="menuBtn"
-onclick="toggleTomorrowItem('🎨 趣味')">
-🎨 趣味
-</button>
-
-<button
-class="menuBtn"
-onclick="toggleTomorrowItem('👥 地域会合')">
-👥 地域会合
-</button>
-
-</div>
-
-</div>
-
-<!-- DayDream -->
 
 <div class="card">
-
-<div class="sectionTitle">
-💌 DayDreamプラス メッセージ
+  <div class="title">🎂 記念日</div>
+  <div id="anniversaryText">記念日を設定してください✨</div>
 </div>
 
-<div
-id="messageArea"
-class="message">
+<button class="settings" onclick="openSettings()">⚙️</button>
 
-読み込み中...
+<div class="modal" id="modal">
+  <div class="modalContent">
 
+    <div class="title">⚙️ 設定</div>
+
+    <input type="text" id="name" placeholder="名前">
+    <input type="text" id="nickname" placeholder="あだ名">
+    <input type="text" id="city" placeholder="住んでいる地域">
+    <input type="date" id="birthday">
+    <input type="text" id="hobby" placeholder="趣味">
+
+    <input type="text" id="anniversaryName" placeholder="記念日名（例：結婚記念日）">
+    <input type="date" id="anniversaryDate">
+
+    <div class="title">🔠 文字サイズ</div>
+
+    <div class="fontButtons">
+      <button class="btn btnSub" onclick="setFont(26)">少し小さめ</button>
+      <button class="btn btnSub" onclick="setFont(30)">標準</button>
+      <button class="btn btnSub" onclick="setFont(34)">大</button>
+      <button class="btn btnSub" onclick="setFont(40)">最大</button>
+    </div>
+
+    <button class="btn btnPrimary" onclick="saveSettings()">保存</button>
+    <button class="btn btnSub" onclick="closeSettings()">閉じる</button>
+  </div>
 </div>
 
-<button
-class="voice"
-onclick="readSchedule()">
+<div class="modal" id="scheduleModal">
+  <div class="modalContent">
 
-🔊 今日の予定を読み上げ
+    <div class="title">🗓️ 予定一覧・追加・編集</div>
 
-</button>
+    <div class="selectedDateLabel" id="selectedDateLabel"></div>
 
+    <div class="sectionLabel">この日の予定</div>
+    <div class="scheduleList" id="scheduleList"></div>
+
+    <div class="sectionLabel" id="formSectionTitle">新しい予定を追加</div>
+
+    <div class="formModeBox" id="formModeBox">追加モードです</div>
+
+    <select id="scheduleCategory">
+      <option value="病院">病院</option>
+      <option value="買い物">買い物</option>
+      <option value="薬">薬</option>
+      <option value="その他">その他</option>
+    </select>
+
+    <input type="time" id="scheduleTime">
+
+    <input type="text" id="scheduleTitle" placeholder="予定名（例：内科受診、スーパー、朝の薬）">
+
+    <textarea id="scheduleMemo" placeholder="メモ（任意）"></textarea>
+
+    <button class="btn btnPrimary" id="saveScheduleBtn" onclick="saveScheduleForm()">予定を追加</button>
+    <button class="btn btnSub" id="cancelEditBtn" onclick="cancelEditMode()" style="display:none;">編集をやめる</button>
+    <button class="btn btnSub" onclick="closeScheduleModal()">閉じる</button>
+
+  </div>
 </div>
 
-<!-- メモ -->
-
-<div class="card">
-
-<div class="sectionTitle">
-✍️ 今日の思い出
-</div>
-
-<textarea
-id="memo"
-maxlength="50"
-placeholder="50文字以内">
-</textarea>
-
-<button
-class="mainBtn"
-onclick="saveMemo()">
-
-💾 保存
-
-</button>
-
-</div>
-
-<!-- お薬 -->
-
-<div class="card">
-
-<div class="sectionTitle">
-💊 お薬チェック
-</div>
-
-<div class="checkArea">
-
-<label>
-<input type="checkbox" id="morning">
-朝
-</label>
-
-<br>
-
-<label>
-<input type="checkbox" id="noon">
-昼
-</label>
-
-<br>
-
-<label>
-<input type="checkbox" id="night">
-夜
-</label>
-
-</div>
-
-</div>
-
-<!-- 緊急 -->
-
-<div class="card">
-
-<div class="sectionTitle">
-🚨 緊急連絡先
-</div>
-
-<button
-class="emergency"
-onclick="showEmergencyContacts()">
-
-📞 緊急連絡先を見る
-
-</button>
-
-<div
-id="emergencyList"
-class="previewBox"
-style="display:none;">
-
-未設定です😊
-
-</div>
-
-</div>
-
-</div>
+<div class="footerSpace"></div>
 
 <script>
 
-/* 設定 */
+function pad2(num){
+  num = String(num);
+  if(num.length < 2){
+    return "0" + num;
+  }
+  return num;
+}
 
-function toggleSettings(){
+function scrollToCard(id){
+  var el = document.getElementById(id);
+  if(!el){ return; }
+  try{
+    el.scrollIntoView({ behavior:"smooth", block:"start" });
+  }catch(e){
+    el.scrollIntoView(true);
+  }
+}
 
-  settings.classList.toggle(
-    "show"
-  );
+function updateClock(){
+  var now = new Date();
+  var week = ["日","月","火","水","木","金","土"];
+  var reiwa = now.getFullYear() - 2018;
+  var h = now.getHours();
+  var ampm = h >= 12 ? "午後" : "午前";
+  var hh = pad2(h % 12 || 12);
+  var mm = pad2(now.getMinutes());
 
+  document.getElementById("date").innerHTML =
+    "令和" + reiwa + "年<br>" +
+    (now.getMonth()+1) + "月" +
+    now.getDate() + "日" +
+    "（" + week[now.getDay()] + "曜日）";
+
+  document.getElementById("time").innerHTML = ampm + " " + hh + ":" + mm;
+}
+
+setInterval(updateClock,1000);
+updateClock();
+
+var messages = [
+  "悠真：今日はゆっくりでも大丈夫☺️",
+  "結衣：頑張ってるのちゃんと知ってるよ✨",
+  "蓮：焦らなくて大丈夫！",
+  "葵：笑顔でいこうね🌸",
+  "大地：元気出していこう！",
+  "美琴：あなたは一人じゃないよ🌈"
+];
+
+function randomMessage(){
+  var msg = messages[Math.floor(Math.random()*messages.length)];
+  document.getElementById("messageArea").innerHTML = msg;
+}
+randomMessage();
+
+function setMood(mood){
+  localStorage.setItem("mood", mood);
+  document.getElementById("moodText").innerHTML = "保存した気分： " + mood;
+  alert("気分を保存しました✨");
+  randomMessage();
+}
+
+function loadMood(){
+  var mood = localStorage.getItem("mood") || "";
+  if(mood){
+    document.getElementById("moodText").innerHTML = "保存した気分： " + mood;
+  }else{
+    document.getElementById("moodText").innerHTML = "まだ気分は保存されていません";
+  }
+}
+loadMood();
+
+function saveChecks(){
+  localStorage.setItem("morning", document.getElementById("morning").checked);
+  localStorage.setItem("noon", document.getElementById("noon").checked);
+  localStorage.setItem("night", document.getElementById("night").checked);
+}
+
+function bindCheck(id){
+  document.getElementById(id).addEventListener("change", saveChecks);
+}
+bindCheck("morning");
+bindCheck("noon");
+bindCheck("night");
+
+function loadChecks(){
+  var ids = ["morning","noon","night"];
+  var i;
+  for(i=0;i<ids.length;i++){
+    document.getElementById(ids[i]).checked = localStorage.getItem(ids[i]) === "true";
+  }
+}
+loadChecks();
+
+function resetMedicineChecks(){
+  document.getElementById("morning").checked = false;
+  document.getElementById("noon").checked = false;
+  document.getElementById("night").checked = false;
+  saveChecks();
+  alert("薬チェックをもどしました");
+}
+
+function openSettings(){
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeSettings(){
+  document.getElementById("modal").style.display = "none";
+}
+
+function refreshAnniversaryText(){
+  var name = localStorage.getItem("anniversaryName") || localStorage.getItem("anniversary") || "";
+  var date = localStorage.getItem("anniversaryDate") || "";
+
+  if(date){
+    var parts = date.split("-");
+    var month = Number(parts[1]);
+    var day = Number(parts[2]);
+
+    document.getElementById("anniversaryText").innerHTML =
+      "🎉 " + (name || "記念日") + "<br>" +
+      "毎年 " + month + "月" + day + "日";
+    return;
+  }
+
+  if(name){
+    document.getElementById("anniversaryText").innerHTML =
+      "🎉 " + name + "<br>" +
+      "<span style='font-size:0.85em;color:#777;'>日付を設定するとカレンダーに自動表示されます</span>";
+    return;
+  }
+
+  document.getElementById("anniversaryText").innerHTML = "記念日を設定してください✨";
 }
 
 function saveSettings(){
+  var ids = [
+    "name",
+    "nickname",
+    "city",
+    "birthday",
+    "hobby",
+    "anniversaryName",
+    "anniversaryDate"
+  ];
 
-  const data = {
+  var i;
+  for(i=0;i<ids.length;i++){
+    localStorage.setItem(ids[i], document.getElementById(ids[i]).value);
+  }
 
-    name:userName.value,
-    city:userCity.value,
-    birthday:birthday.value,
-    hobby:hobby.value,
-    anniversary:anniversary.value,
-
-    emergency1:emergency1.value,
-    emergency2:emergency2.value,
-    emergency3:emergency3.value,
-    emergency4:emergency4.value,
-    emergency5:emergency5.value
-
-  };
-
-  localStorage.setItem(
-    "kokoroSettings",
-    JSON.stringify(data)
-  );
-
-  alert("保存しました😊");
-
+  refreshAnniversaryText();
+  renderCalendar();
+  alert("保存しました✨");
+  closeSettings();
 }
 
 function loadSettings(){
+  var ids = [
+    "name",
+    "nickname",
+    "city",
+    "birthday",
+    "hobby",
+    "anniversaryName",
+    "anniversaryDate"
+  ];
 
-  const data =
+  var i;
+  for(i=0;i<ids.length;i++){
+    document.getElementById(ids[i]).value = localStorage.getItem(ids[i]) || "";
+  }
 
-  JSON.parse(
+  if(!document.getElementById("anniversaryName").value && localStorage.getItem("anniversary")){
+    document.getElementById("anniversaryName").value = localStorage.getItem("anniversary");
+  }
 
-    localStorage.getItem(
-      "kokoroSettings"
-    ) || "{}"
-
-  );
-
-  userName.value =
-  data.name || "";
-
-  userCity.value =
-  data.city || "";
-
-  birthday.value =
-  data.birthday || "";
-
-  hobby.value =
-  data.hobby || "";
-
-  anniversary.value =
-  data.anniversary || "";
-
-  emergency1.value =
-  data.emergency1 || "";
-
-  emergency2.value =
-  data.emergency2 || "";
-
-  emergency3.value =
-  data.emergency3 || "";
-
-  emergency4.value =
-  data.emergency4 || "";
-
-  emergency5.value =
-  data.emergency5 || "";
-
+  refreshAnniversaryText();
 }
-
 loadSettings();
 
-/* 日時 */
-
-function updateDateTime(){
-
-  const now =
-  new Date();
-
-  const week = [
-
-    "日曜日",
-    "月曜日",
-    "火曜日",
-    "水曜日",
-    "木曜日",
-    "金曜日",
-    "土曜日"
-
-  ];
-
-  let hour =
-  now.getHours();
-
-  const minute =
-  String(
-    now.getMinutes()
-  ).padStart(2,"0");
-
-  const ampm =
-  hour >= 12
-  ? "午後"
-  : "午前";
-
-  hour =
-  hour % 12;
-
-  if(hour === 0){
-    hour = 12;
-  }
-
-  date.innerHTML =
-
-  `📅 ${now.getFullYear()}年
-  ${now.getMonth()+1}月
-  ${now.getDate()}日
-  ${week[now.getDay()]}`;
-
-  time.innerHTML =
-  `🕒 ${ampm}${hour}時${minute}分`;
-
+function setFont(size){
+  document.documentElement.style.setProperty("--fontSize", size + "px");
+  localStorage.setItem("fontSize", size);
 }
 
-setInterval(
-  updateDateTime,
-  1000
-);
+var savedFont = localStorage.getItem("fontSize");
+if(savedFont){
+  setFont(savedFont);
+}
 
-updateDateTime();
+var calendarDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+var scheduleStorageKey = "calendarSchedulesV3";
+var selectedDateKey = "";
+var editingScheduleId = null;
 
-/* 季節背景 */
+var categoryMeta = {
+  "病院": { className:"cat-hospital", borderClass:"border-hospital" },
+  "買い物": { className:"cat-shopping", borderClass:"border-shopping" },
+  "薬": { className:"cat-medicine", borderClass:"border-medicine" },
+  "記念日": { className:"cat-anniversary", borderClass:"border-anniversary" },
+  "その他": { className:"cat-other", borderClass:"border-other" }
+};
 
-function setSeason(){
+function createId(){
+  return "id-" + new Date().getTime().toString(36) + Math.random().toString(36).slice(2,8);
+}
 
-  const month =
-  new Date().getMonth()+1;
+function getCategoryMeta(category){
+  return categoryMeta[category] || categoryMeta["その他"];
+}
 
-  document.body.className="";
+function normalizeScheduleItem(item){
+  if(typeof item === "string"){
+    return {
+      id:createId(),
+      category:"その他",
+      time:"",
+      text:item,
+      memo:""
+    };
+  }
 
-  if(month>=3 && month<=5){
+  return {
+    id:item.id || createId(),
+    category:item.category || "その他",
+    time:item.time || "",
+    text:item.text || "",
+    memo:item.memo || ""
+  };
+}
 
-    document.body.classList.add(
-      "spring"
-    );
+function loadSchedulesData(){
+  var keysToTry = ["calendarSchedulesV3","calendarSchedulesV2","calendarSchedules"];
+  var i;
 
-  }else if(month>=6 && month<=8){
+  for(i=0;i<keysToTry.length;i++){
+    try{
+      var raw = localStorage.getItem(keysToTry[i]);
+      if(raw){
+        var parsed = JSON.parse(raw);
+        var normalized = {};
+        var dateKey;
 
-    document.body.classList.add(
-      "summer"
-    );
+        for(dateKey in parsed){
+          if(parsed.hasOwnProperty(dateKey)){
+            var value = parsed[dateKey];
+            var j;
 
-  }else if(month>=9 && month<=11){
+            if(Object.prototype.toString.call(value) === "[object Array]"){
+              normalized[dateKey] = [];
+              for(j=0;j<value.length;j++){
+                var v = normalizeScheduleItem(value[j]);
+                if(v.text && v.text.trim()){
+                  normalized[dateKey].push(v);
+                }
+              }
+            }else if(typeof value === "string" && value.trim()){
+              normalized[dateKey] = [normalizeScheduleItem(value)];
+            }
+          }
+        }
 
-    document.body.classList.add(
-      "autumn"
-    );
+        localStorage.setItem(scheduleStorageKey, JSON.stringify(normalized));
+        return normalized;
+      }
+    }catch(e){}
+  }
 
+  return {};
+}
+
+var schedules = loadSchedulesData();
+
+function saveSchedulesData(){
+  localStorage.setItem(scheduleStorageKey, JSON.stringify(schedules));
+}
+
+function getDateKey(year, month, day){
+  return year + "-" + pad2(month + 1) + "-" + pad2(day);
+}
+
+function getAnniversaryEventForDate(dateKey){
+  var anniversaryDate = localStorage.getItem("anniversaryDate") || "";
+  var anniversaryName = localStorage.getItem("anniversaryName") || localStorage.getItem("anniversary") || "";
+
+  if(!anniversaryDate){
+    return null;
+  }
+
+  var parts = anniversaryDate.split("-");
+  if(parts.length !== 3){
+    return null;
+  }
+
+  var dateParts = dateKey.split("-");
+  if(parts[1] === dateParts[1] && parts[2] === dateParts[2]){
+    return {
+      id:"anniversary-" + parts[1] + parts[2],
+      category:"記念日",
+      time:"",
+      text:anniversaryName || "記念日",
+      memo:"毎年くり返し表示される記念日です",
+      isAnniversary:true
+    };
+  }
+
+  return null;
+}
+
+function sortEvents(list){
+  var copy = list.slice();
+
+  copy.sort(function(a,b){
+    if(a.isAnniversary && !b.isAnniversary){ return -1; }
+    if(!a.isAnniversary && b.isAnniversary){ return 1; }
+
+    var timeA = a.time || "99:99";
+    var timeB = b.time || "99:99";
+
+    if(timeA < timeB){ return -1; }
+    if(timeA > timeB){ return 1; }
+    return 0;
+  });
+
+  return copy;
+}
+
+function getUserSchedules(dateKey){
+  if(Object.prototype.toString.call(schedules[dateKey]) === "[object Array]"){
+    return schedules[dateKey];
+  }
+  return [];
+}
+
+function getEventsForDate(dateKey){
+  var list = [];
+  var ann = getAnniversaryEventForDate(dateKey);
+  var userList = getUserSchedules(dateKey);
+  var i;
+
+  if(ann){
+    list.push(ann);
+  }
+
+  for(i=0;i<userList.length;i++){
+    list.push(userList[i]);
+  }
+
+  return sortEvents(list);
+}
+
+function getTodayDateKey(){
+  var now = new Date();
+  return getDateKey(now.getFullYear(), now.getMonth(), now.getDate());
+}
+
+function renderTodaySchedule(){
+  var now = new Date();
+  var week = ["日","月","火","水","木","金","土"];
+  var todayKey = getTodayDateKey();
+  var events = getEventsForDate(todayKey);
+
+  document.getElementById("todayAgendaDate").innerHTML =
+    (now.getMonth()+1) + "月" + now.getDate() + "日（" + week[now.getDay()] + "）";
+
+  var summary = document.getElementById("todayAgendaSummary");
+  var content = document.getElementById("todayAgendaContent");
+
+  if(events.length === 0){
+    summary.innerHTML = "";
+    content.innerHTML = "<div class='todayAgendaEmpty'>今日は予定はありません🌷<br>ゆっくり過ごせます</div>";
+    return;
+  }
+
+  summary.innerHTML = "<span class='todayAgendaCount'>今日の予定 " + events.length + "件</span>";
+  content.innerHTML = "";
+
+  var i;
+  for(i=0;i<events.length;i++){
+    var event = events[i];
+    var meta = getCategoryMeta(event.category);
+
+    var item = document.createElement("div");
+    item.className = "todayAgendaItem " + meta.borderClass;
+
+    var top = document.createElement("div");
+    top.className = "todayAgendaTop";
+
+    var category = document.createElement("span");
+    category.className = "categoryBadge " + meta.className;
+    category.textContent = event.category;
+    top.appendChild(category);
+
+    var time = document.createElement("span");
+    time.className = "timeBadge";
+    time.textContent = event.time || "終日";
+    top.appendChild(time);
+
+    item.appendChild(top);
+
+    var title = document.createElement("div");
+    title.className = "todayAgendaTitle";
+    title.textContent = event.text;
+    item.appendChild(title);
+
+    if(event.memo){
+      var memo = document.createElement("div");
+      memo.className = "todayAgendaMemo";
+      memo.textContent = event.memo;
+      item.appendChild(memo);
+    }
+
+    content.appendChild(item);
+  }
+}
+
+function clearScheduleInputs(){
+  document.getElementById("scheduleCategory").value = "病院";
+  document.getElementById("scheduleTime").value = "";
+  document.getElementById("scheduleTitle").value = "";
+  document.getElementById("scheduleMemo").value = "";
+}
+
+function setFormToAddMode(){
+  editingScheduleId = null;
+  document.getElementById("formSectionTitle").textContent = "新しい予定を追加";
+  document.getElementById("formModeBox").textContent = "追加モードです";
+  document.getElementById("saveScheduleBtn").textContent = "予定を追加";
+  document.getElementById("cancelEditBtn").style.display = "none";
+  clearScheduleInputs();
+}
+
+function setFormToEditMode(item){
+  editingScheduleId = item.id;
+  document.getElementById("formSectionTitle").textContent = "予定を編集";
+  document.getElementById("formModeBox").textContent = "編集中です。内容を直して「予定を更新」を押してください";
+  document.getElementById("saveScheduleBtn").textContent = "予定を更新";
+  document.getElementById("cancelEditBtn").style.display = "block";
+
+  document.getElementById("scheduleCategory").value = item.category || "その他";
+  document.getElementById("scheduleTime").value = item.time || "";
+  document.getElementById("scheduleTitle").value = item.text || "";
+  document.getElementById("scheduleMemo").value = item.memo || "";
+}
+
+function openScheduleModal(dateKey){
+  selectedDateKey = dateKey;
+  var arr = dateKey.split("-");
+
+  document.getElementById("selectedDateLabel").innerHTML =
+    arr[0] + "年" + Number(arr[1]) + "月" + Number(arr[2]) + "日の予定";
+
+  renderScheduleList();
+  setFormToAddMode();
+  document.getElementById("scheduleModal").style.display = "flex";
+}
+
+function closeScheduleModal(){
+  document.getElementById("scheduleModal").style.display = "none";
+  setFormToAddMode();
+}
+
+function cancelEditMode(){
+  setFormToAddMode();
+}
+
+function findScheduleById(dateKey, id){
+  var list = getUserSchedules(dateKey);
+  var i;
+  for(i=0;i<list.length;i++){
+    if(list[i].id === id){
+      return list[i];
+    }
+  }
+  return null;
+}
+
+function startEditSchedule(id){
+  var item = findScheduleById(selectedDateKey, id);
+
+  if(!item){
+    alert("編集する予定が見つかりませんでした");
+    return;
+  }
+
+  setFormToEditMode(item);
+}
+
+function deleteScheduleById(dateKey, id){
+  var item = findScheduleById(dateKey, id);
+  if(!item){
+    return;
+  }
+
+  var ok = confirm("「" + item.text + "」を削除しますか？");
+  if(!ok){
+    return;
+  }
+
+  var oldList = getUserSchedules(dateKey);
+  var list = [];
+  var i;
+
+  for(i=0;i<oldList.length;i++){
+    if(oldList[i].id !== id){
+      list.push(oldList[i]);
+    }
+  }
+
+  if(list.length){
+    schedules[dateKey] = list;
   }else{
-
-    document.body.classList.add(
-      "winter"
-    );
-
+    delete schedules[dateKey];
   }
 
+  saveSchedulesData();
+  renderScheduleList();
+  renderCalendar();
+
+  if(editingScheduleId === id){
+    setFormToAddMode();
+  }
+
+  alert("予定を削除しました✨");
 }
 
-setSeason();
+function renderScheduleList(){
+  var scheduleList = document.getElementById("scheduleList");
+  var events = getEventsForDate(selectedDateKey);
+  scheduleList.innerHTML = "";
 
-/* 天気 */
+  if(!events.length){
+    scheduleList.innerHTML = "<div class='emptySchedule'>この日の予定はまだありません</div>";
+    return;
+  }
 
-function translateWeather(text){
+  var i;
+  for(i=0;i<events.length;i++){
+    var event = events[i];
+    var meta = getCategoryMeta(event.category);
 
-  const map = {
+    var item = document.createElement("div");
+    item.className = "scheduleItem";
 
-    "Sunny":"晴れ ☀️",
-    "Clear":"快晴 ☀️",
-    "Partly cloudy":"くもり時々晴れ ⛅",
-    "Cloudy":"くもり ☁️",
-    "Overcast":"厚いくもり ☁️",
-    "Mist":"霧 🌫️",
-    "Patchy rain nearby":"近くで雨 ☔",
-    "Light rain":"小雨 ☔",
-    "Moderate rain":"雨 ☔",
-    "Heavy rain":"大雨 ☔",
-    "Light snow":"小雪 ❄️",
-    "Heavy snow":"大雪 ❄️"
+    var metaWrap = document.createElement("div");
+    metaWrap.className = "scheduleMeta";
 
+    var category = document.createElement("span");
+    category.className = "categoryBadge " + meta.className;
+    category.textContent = event.category;
+    metaWrap.appendChild(category);
+
+    var time = document.createElement("span");
+    time.className = "timeBadge";
+    time.textContent = event.time || "終日";
+    metaWrap.appendChild(time);
+
+    item.appendChild(metaWrap);
+
+    var text = document.createElement("div");
+    text.className = "scheduleText";
+    text.textContent = event.text;
+    item.appendChild(text);
+
+    if(event.memo){
+      var memo = document.createElement("div");
+      memo.className = "scheduleMemo";
+      memo.textContent = event.memo;
+      item.appendChild(memo);
+    }
+
+    if(event.isAnniversary){
+      var note = document.createElement("div");
+      note.className = "readOnlyNote";
+      note.textContent = "※ 記念日は設定画面から変更できます";
+      item.appendChild(note);
+    }else{
+      var actionWrap = document.createElement("div");
+      actionWrap.className = "itemActionButtons";
+
+      var editBtn = document.createElement("button");
+      editBtn.className = "smallBtn editSmallBtn";
+      editBtn.textContent = "編集";
+      editBtn.onclick = (function(id){
+        return function(){
+          startEditSchedule(id);
+        };
+      })(event.id);
+
+      var delBtn = document.createElement("button");
+      delBtn.className = "smallBtn deleteSmallBtn";
+      delBtn.textContent = "削除";
+      delBtn.onclick = (function(id){
+        return function(){
+          deleteScheduleById(selectedDateKey, id);
+        };
+      })(event.id);
+
+      actionWrap.appendChild(editBtn);
+      actionWrap.appendChild(delBtn);
+      item.appendChild(actionWrap);
+    }
+
+    scheduleList.appendChild(item);
+  }
+}
+
+function saveScheduleForm(){
+  var category = document.getElementById("scheduleCategory").value;
+  var time = document.getElementById("scheduleTime").value;
+  var text = document.getElementById("scheduleTitle").value.trim();
+  var memo = document.getElementById("scheduleMemo").value.trim();
+
+  if(!text){
+    alert("予定名を入力してください");
+    return;
+  }
+
+  if(!schedules[selectedDateKey]){
+    schedules[selectedDateKey] = [];
+  }
+
+  if(editingScheduleId){
+    var i;
+    for(i=0;i<schedules[selectedDateKey].length;i++){
+      if(schedules[selectedDateKey][i].id === editingScheduleId){
+        schedules[selectedDateKey][i] = {
+          id:schedules[selectedDateKey][i].id,
+          category:category,
+          time:time,
+          text:text,
+          memo:memo
+        };
+      }
+    }
+
+    schedules[selectedDateKey] = sortEvents(schedules[selectedDateKey]);
+    saveSchedulesData();
+    renderScheduleList();
+    renderCalendar();
+    setFormToAddMode();
+
+    alert("予定を更新しました✨");
+    return;
+  }
+
+  schedules[selectedDateKey].push({
+    id:createId(),
+    category:category,
+    time:time,
+    text:text,
+    memo:memo
+  });
+
+  schedules[selectedDateKey] = sortEvents(schedules[selectedDateKey]);
+
+  saveSchedulesData();
+  renderScheduleList();
+  renderCalendar();
+  setFormToAddMode();
+  alert("予定を追加しました✨");
+}
+
+function uniqueCategoryList(events){
+  var seen = {};
+  var arr = [];
+  var i;
+  for(i=0;i<events.length;i++){
+    var c = events[i].category;
+    if(!seen[c]){
+      seen[c] = true;
+      arr.push(c);
+    }
+  }
+  return arr;
+}
+
+function renderCalendar(){
+  var year = calendarDate.getFullYear();
+  var month = calendarDate.getMonth();
+
+  document.getElementById("calendarTitle").innerHTML = year + "年 " + (month + 1) + "月";
+
+  var firstDay = new Date(year, month, 1).getDay();
+  var lastDate = new Date(year, month + 1, 0).getDate();
+
+  var today = new Date();
+  var calendar = document.getElementById("calendar");
+  calendar.innerHTML = "";
+
+  var i;
+  for(i=0;i<firstDay;i++){
+    var empty = document.createElement("div");
+    empty.className = "calendarCell empty";
+    calendar.appendChild(empty);
+  }
+
+  var day;
+  for(day=1;day<=lastDate;day++){
+    var dateKey = getDateKey(year, month, day);
+    var events = getEventsForDate(dateKey);
+
+    var isToday =
+      today.getFullYear() === year &&
+      today.getMonth() === month &&
+      today.getDate() === day;
+
+    var cell = document.createElement("div");
+    cell.className = "calendarCell";
+
+    if(isToday){
+      cell.className += " today";
+    }
+
+    if(events.length > 0){
+      cell.className += " hasEvent";
+    }
+
+    cell.onclick = (function(key){
+      return function(){
+        openScheduleModal(key);
+      };
+    })(dateKey);
+
+    var dateNum = document.createElement("div");
+    dateNum.className = "dateNum";
+    dateNum.textContent = day;
+    cell.appendChild(dateNum);
+
+    if(events.length > 0){
+      var count = document.createElement("div");
+      count.className = "eventCount";
+      count.textContent = events.length + "件";
+      cell.appendChild(count);
+
+      var maxEvents = events.length > 2 ? 2 : events.length;
+      var j;
+      for(j=0;j<maxEvents;j++){
+        var meta = getCategoryMeta(events[j].category);
+        var line = document.createElement("div");
+        line.className = "eventLine " + meta.borderClass;
+        line.textContent = (events[j].time ? events[j].time + " " : "") + events[j].text;
+        cell.appendChild(line);
+      }
+
+      if(events.length > 2){
+        var more = document.createElement("div");
+        more.className = "moreLine";
+        more.textContent = "ほか " + (events.length - 2) + "件";
+        cell.appendChild(more);
+      }
+    }
+
+    calendar.appendChild(cell);
+  }
+
+  renderTodaySchedule();
+}
+
+function changeMonth(step){
+  calendarDate.setMonth(calendarDate.getMonth() + step);
+  renderCalendar();
+}
+renderCalendar();
+
+function weatherCodeToJapanese(code){
+  var map = {
+    0:{ text:"快晴", icon:"☀️" },
+    1:{ text:"晴れ", icon:"🌤️" },
+    2:{ text:"晴れ時々くもり", icon:"⛅" },
+    3:{ text:"くもり", icon:"☁️" },
+    45:{ text:"霧", icon:"🌫️" },
+    48:{ text:"霧", icon:"🌫️" },
+    51:{ text:"弱い霧雨", icon:"🌦️" },
+    53:{ text:"霧雨", icon:"🌦️" },
+    55:{ text:"強い霧雨", icon:"🌧️" },
+    61:{ text:"弱い雨", icon:"🌦️" },
+    63:{ text:"雨", icon:"🌧️" },
+    65:{ text:"強い雨", icon:"🌧️" },
+    71:{ text:"弱い雪", icon:"❄️" },
+    73:{ text:"雪", icon:"❄️" },
+    75:{ text:"大雪", icon:"❄️" },
+    80:{ text:"にわか雨", icon:"🌦️" },
+    81:{ text:"やや強いにわか雨", icon:"🌧️" },
+    82:{ text:"激しいにわか雨", icon:"⛈️" },
+    85:{ text:"にわか雪", icon:"🌨️" },
+    86:{ text:"激しいにわか雪", icon:"🌨️" },
+    95:{ text:"雷雨", icon:"⛈️" },
+    96:{ text:"ひょうを伴う雷雨", icon:"⛈️" },
+    99:{ text:"激しい雷雨", icon:"⛈️" }
   };
 
-  return map[text] || text;
-
+  return map[code] || { text:"天気情報取得", icon:"🌈" };
 }
 
-async function getWeather(){
+function getJSON(url, onSuccess, onError){
+  if(window.fetch){
+    fetch(url)
+      .then(function(res){
+        if(!res.ok){
+          throw new Error("network");
+        }
+        return res.json();
+      })
+      .then(function(data){
+        onSuccess(data);
+      })
+      .catch(function(){
+        onError();
+      });
+    return;
+  }
 
   try{
-
-    const res =
-    await fetch(
-      "https://wttr.in/?format=j1"
-    );
-
-    const data =
-    await res.json();
-
-    const current =
-    data.current_condition[0];
-
-    const today =
-    data.weather[0];
-
-    weather.innerHTML = `
-
-    ⛅ ${
-      translateWeather(
-        current.weatherDesc[0].value
-      )
-    }
-
-    <br><br>
-
-    🌡️ 現在：
-    ${current.temp_C}℃
-
-    <br><br>
-
-    🔥 最高気温：
-    ${today.maxtempC}℃
-
-    <br><br>
-
-    ❄️ 最低気温：
-    ${today.mintempC}℃
-
-    `;
-
-    weatherUpdate.innerHTML =
-    "最終更新：" +
-    new Date().toLocaleTimeString(
-      "ja-JP"
-    );
-
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState === 4){
+        if(xhr.status >= 200 && xhr.status < 300){
+          try{
+            var data = JSON.parse(xhr.responseText);
+            onSuccess(data);
+          }catch(e){
+            onError();
+          }
+        }else{
+          onError();
+        }
+      }
+    };
+    xhr.send();
   }catch(e){
+    onError();
+  }
+}
 
-    weather.innerHTML =
-    "⚠️ 天気取得失敗";
+function reverseGeocode(lat, lon, callback){
+  var url = "https://geocoding-api.open-meteo.com/v1/reverse?latitude=" + lat + "&longitude=" + lon + "&language=ja";
 
+  getJSON(url, function(data){
+    if(data && data.results && data.results.length > 0){
+      var place = data.results[0];
+      var admin1 = place.admin1 || "";
+      var name = place.name || "";
+      callback((admin1 + " " + name).replace(/^\s+|\s+$/g,""));
+      return;
+    }
+    callback("現在地");
+  }, function(){
+    callback("現在地");
+  });
+}
+
+function fetchWeather(lat, lon){
+  var weatherText = document.getElementById("weatherText");
+  var weatherIcon = document.getElementById("weatherIcon");
+
+  weatherText.innerHTML = "天気情報を取得しています...";
+  weatherIcon.innerHTML = "📡";
+
+  reverseGeocode(lat, lon, function(placeName){
+    var url = "https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + lon + "&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&forecast_days=1";
+
+    getJSON(url, function(data){
+      try{
+        var code = data.current.weather_code;
+        var weather = weatherCodeToJapanese(code);
+
+        var currentTemp = Math.round(data.current.temperature_2m);
+        var maxTemp = Math.round(data.daily.temperature_2m_max[0]);
+        var minTemp = Math.round(data.daily.temperature_2m_min[0]);
+        var rain = 0;
+
+        if(data.daily && data.daily.precipitation_probability_max && typeof data.daily.precipitation_probability_max[0] !== "undefined"){
+          rain = Math.round(data.daily.precipitation_probability_max[0]);
+        }
+
+        weatherIcon.innerHTML = weather.icon;
+        weatherText.innerHTML =
+          placeName + "<br>" +
+          weather.text + "<br>" +
+          "現在 " + currentTemp + "℃<br>" +
+          "最高" + maxTemp + "℃ / 最低" + minTemp + "℃<br>" +
+          "降水確率" + rain + "%";
+      }catch(e){
+        weatherIcon.innerHTML = "⚠️";
+        weatherText.innerHTML = "天気情報の取得に失敗しました。<br>通信状態を確認してもう一度お試しください。";
+      }
+    }, function(){
+      weatherIcon.innerHTML = "⚠️";
+      weatherText.innerHTML = "天気情報の取得に失敗しました。<br>通信状態を確認してもう一度お試しください。";
+    });
+  });
+}
+
+function loadWeatherByGPS(){
+  var weatherText = document.getElementById("weatherText");
+  var weatherIcon = document.getElementById("weatherIcon");
+
+  if(!navigator.geolocation){
+    weatherIcon.innerHTML = "⚠️";
+    weatherText.innerHTML = "この端末ではGPSが使えません。";
+    return;
   }
 
-}
-
-getWeather();
-
-/* 今日予定 */
-
-function showTodaySchedule(){
-
-  const today =
-
-  JSON.parse(
-
-    localStorage.getItem(
-      "todaySchedules"
-    ) || "[]"
-
-  );
-
-  todaySchedule.innerHTML =
-
-  today.length
-
-  ?
-
-  today.map(s =>
-    `・${s}`
-  ).join("<br>")
-
-  :
-
-  "予定はありません😊";
-
-}
-
-function toggleTodayItem(text){
-
-  let schedules =
-
-  JSON.parse(
-
-    localStorage.getItem(
-      "todaySchedules"
-    ) || "[]"
-
-  );
-
-  if(schedules.includes(text)){
-
-    schedules =
-    schedules.filter(
-      s => s !== text
-    );
-
-  }else{
-
-    schedules.push(text);
-
+  if(
+    location.protocol !== "https:" &&
+    location.hostname !== "localhost" &&
+    location.hostname !== "127.0.0.1"
+  ){
+    weatherIcon.innerHTML = "⚠️";
+    weatherText.innerHTML = "GPSはHTTPS環境で動作します。<br>スマホで直接HTMLを開くと位置情報が使えない場合があります。";
+    return;
   }
 
-  localStorage.setItem(
-    "todaySchedules",
-    JSON.stringify(schedules)
+  weatherIcon.innerHTML = "📍";
+  weatherText.innerHTML = "現在地を取得しています...";
+
+  navigator.geolocation.getCurrentPosition(
+    function(position){
+      var lat = position.coords.latitude;
+      var lon = position.coords.longitude;
+
+      localStorage.setItem("lastLat", lat);
+      localStorage.setItem("lastLon", lon);
+
+      fetchWeather(lat, lon);
+    },
+    function(error){
+      weatherIcon.innerHTML = "⚠️";
+
+      var msg = "GPSの取得に失敗しました。";
+
+      switch(error.code){
+        case error.PERMISSION_DENIED:
+          msg = "位置情報の許可がOFFです。<br>ブラウザの位置情報を許可してください。";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          msg = "現在地を取得できませんでした。<br>電波状況をご確認ください。";
+          break;
+        case error.TIMEOUT:
+          msg = "位置情報の取得がタイムアウトしました。<br>もう一度お試しください。";
+          break;
+      }
+
+      weatherText.innerHTML = msg;
+
+      var lastLat = localStorage.getItem("lastLat");
+      var lastLon = localStorage.getItem("lastLon");
+
+      if(lastLat && lastLon){
+        fetchWeather(lastLat, lastLon);
+      }
+    },
+    {
+      enableHighAccuracy:true,
+      timeout:10000,
+      maximumAge:300000
+    }
   );
-
-  showTodaySchedule();
-
 }
 
-showTodaySchedule();
+/* 日本の国クイズ */
+var japanQuizState = {
+  questions: [],
+  index: 0,
+  score: 0,
+  sourceUrl: "https://restcountries.com/v3.1/name/japan?fullText=true",
+  fromCache: false
+};
 
-/* 明日 */
-
-function showTomorrowPreview(){
-
-  const tomorrow =
-
-  JSON.parse(
-
-    localStorage.getItem(
-      "tomorrowSchedules"
-    ) || "[]"
-
-  );
-
-  tomorrowPreview.innerHTML =
-
-  tomorrow.length
-
-  ?
-
-  tomorrow.map(s =>
-    `・${s}`
-  ).join("<br>")
-
-  :
-
-  "明日の予定はありません😊";
-
+function shuffleArray(array){
+  var arr = array.slice();
+  var i, j, temp;
+  for(i=arr.length-1;i>0;i--){
+    j = Math.floor(Math.random() * (i + 1));
+    temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+  return arr;
 }
 
-function toggleTomorrowItem(text){
+function getJapanCurrencyLabel(country){
+  var codes = [];
+  var code, info, name, symbol;
 
-  let schedules =
-
-  JSON.parse(
-
-    localStorage.getItem(
-      "tomorrowSchedules"
-    ) || "[]"
-
-  );
-
-  if(schedules.includes(text)){
-
-    schedules =
-    schedules.filter(
-      s => s !== text
-    );
-
-  }else{
-
-    schedules.push(text);
-
+  if(country && country.currencies){
+    for(code in country.currencies){
+      if(country.currencies.hasOwnProperty(code)){
+        codes.push(code);
+      }
+    }
   }
 
-  localStorage.setItem(
-    "tomorrowSchedules",
-    JSON.stringify(schedules)
-  );
+  code = codes.length ? codes[0] : "JPY";
+  info = (country && country.currencies && country.currencies[code]) ? country.currencies[code] : {};
+  name = info.name || "Japanese yen";
+  symbol = info.symbol || "¥";
 
-  showTomorrowPreview();
-
-}
-
-showTomorrowPreview();
-
-/* メモ */
-
-memo.value =
-localStorage.getItem(
-  "memo"
-) || "";
-
-function saveMemo(){
-
-  localStorage.setItem(
-    "memo",
-    memo.value
-  );
-
-  alert("保存しました😊");
-
-}
-
-/* お薬 */
-
-function saveMedicine(){
-
-  const data = {
-
-    morning:
-    morning.checked,
-
-    noon:
-    noon.checked,
-
-    night:
-    night.checked
-
+  return {
+    code: code,
+    label: symbol + " " + name + " (" + code + ")"
   };
-
-  localStorage.setItem(
-    "medicine",
-    JSON.stringify(data)
-  );
-
 }
 
-function loadMedicine(){
+function buildJapanQuizQuestions(country){
+  var currency = getJapanCurrencyLabel(country);
+  var timezone = "UTC+09:00";
+  var callingCode = "+81";
+  var postalFormat = "###-####";
+  var areaText = "377,930 km²";
+  var populationText = "123,210,000人";
+  var carSide = "左側通行";
 
-  const data =
-
-  JSON.parse(
-
-    localStorage.getItem(
-      "medicine"
-    ) || "{}"
-
-  );
-
-  morning.checked =
-  data.morning || false;
-
-  noon.checked =
-  data.noon || false;
-
-  night.checked =
-  data.night || false;
-
-}
-
-loadMedicine();
-
-document
-.querySelectorAll(
-  "input[type='checkbox']"
-)
-.forEach(el => {
-
-  el.addEventListener(
-    "change",
-    saveMedicine
-  );
-
-});
-
-/* 音声 */
-
-function readSchedule(){
-
-  const schedules =
-
-  JSON.parse(
-
-    localStorage.getItem(
-      "todaySchedules"
-    ) || "[]"
-
-  );
-
-  let text =
-
-  schedules.length
-
-  ?
-
-  "今日の予定を読み上げます。" +
-  schedules.join("。")
-
-  :
-
-  "今日の予定はありません";
-
-  const speech =
-  new SpeechSynthesisUtterance(
-    text
-  );
-
-  speech.lang = "ja-JP";
-
-  speech.rate = 0.9;
-
-  speechSynthesis.cancel();
-
-  speechSynthesis.speak(
-    speech
-  );
-
-}
-
-/* 緊急 */
-
-let emergencyOpen = false;
-
-function showEmergencyContacts(){
-
-  const data =
-
-  JSON.parse(
-
-    localStorage.getItem(
-      "kokoroSettings"
-    ) || "{}"
-
-  );
-
-  let html = "";
-
-  for(let i=1;i<=5;i++){
-
-    const value =
-    data["emergency"+i];
-
-    if(value){
-
-      html += `
-
-      <div style="
-      background:#fff4c8;
-      padding:14px;
-      border-radius:16px;
-      margin-bottom:10px;
-      ">
-
-      📞 ${value}
-
-      </div>
-
-      `;
-
+  if(country){
+    if(country.timezones && country.timezones.length){
+      timezone = country.timezones[0];
     }
 
+    if(country.idd && country.idd.root && country.idd.suffixes && country.idd.suffixes.length){
+      callingCode = country.idd.root + country.idd.suffixes[0];
+    }
+
+    if(country.postalCode && country.postalCode.format){
+      postalFormat = country.postalCode.format;
+    }
+
+    if(country.area){
+      areaText = Math.round(country.area).toLocaleString("ja-JP") + " km²";
+    }
+
+    if(country.population){
+      populationText = Number(country.population).toLocaleString("ja-JP") + "人";
+    }
+
+    if(country.car && country.car.side === "right"){
+      carSide = "右側通行";
+    }
   }
 
-  if(html===""){
-
-    html="未設定です😊";
-
-  }
-
-  if(emergencyOpen){
-
-    emergencyList.style.display =
-    "none";
-
-    emergencyOpen = false;
-
-    return;
-
-  }
-
-  emergencyList.innerHTML =
-  html;
-
-  emergencyList.style.display =
-  "block";
-
-  emergencyOpen = true;
-
-}
-
-/* DayDream */
-
-const members = [
-
-"🌸 悠真",
-"🎀 葵",
-"🎸 蓮",
-"🎤 結衣",
-"🥁 大地"
-
-];
-
-const greetings = [
-
-"今日もゆっくりいこう😊",
-"無理しすぎないでね✨",
-"ちゃんと休憩も大事だよ☕",
-"今日も応援してるよ🌈",
-"マイペースで大丈夫🌸",
-"頑張っててえらいよ✨",
-"少しずつで大丈夫😊",
-"いっぱい応援してるよ🎶",
-"焦らなくて大丈夫🌸",
-"今日はいい日になるよ☀️"
-
-];
-
-const timeMessages = [
-
-"朝はゆっくりスタート☀️",
-"お昼も無理しないでね🍙",
-"夜はゆっくり休もう🌙",
-"深夜は暖かくしてね✨",
-"水分補給忘れずに🥤"
-
-];
-
-const seasonMessages = [
-
-"春の空気気持ちいいね🌸",
-"夏バテ気をつけてね☀️",
-"秋の景色綺麗だね🍁",
-"冬は暖かくしてね❄️",
-"今日の空も綺麗だね☁️"
-
-];
-
-function randomItem(arr){
-
-  return arr[
-    Math.floor(
-      Math.random()
-      * arr.length
-    )
+  var baseQuestions = [
+    {
+      question:"日本の首都はどこ？",
+      choices:shuffleArray(["東京","大阪","京都","札幌"]),
+      answer:"東京"
+    },
+    {
+      question:"日本の通貨コードは？",
+      choices:shuffleArray([currency.code,"USD","CNY","KRW"]),
+      answer:currency.code
+    },
+    {
+      question:"日本で主に使われる言語は？",
+      choices:shuffleArray(["日本語","英語","中国語","韓国語"]),
+      answer:"日本語"
+    },
+    {
+      question:"日本の標準時は？",
+      choices:shuffleArray([timezone,"UTC+08:00","UTC+10:00","UTC+07:00"]),
+      answer:timezone
+    },
+    {
+      question:"日本の国際電話番号は？",
+      choices:shuffleArray([callingCode,"+82","+86","+66"]),
+      answer:callingCode
+    },
+    {
+      question:"日本の車はどちら側通行？",
+      choices:shuffleArray([carSide,"右側通行","中央通行","地域で毎回変わる"]),
+      answer:carSide
+    },
+    {
+      question:"日本の郵便番号の基本形式は？",
+      choices:shuffleArray([postalFormat,"#####","AA-0000","000-00"]),
+      answer:postalFormat
+    },
+    {
+      question:"日本はどの地域に分類される？",
+      choices:shuffleArray(["アジア","ヨーロッパ","北アメリカ","オセアニア"]),
+      answer:"アジア"
+    },
+    {
+      question:"日本のより細かい地域区分は？",
+      choices:shuffleArray(["東アジア","東南アジア","南アジア","中央アジア"]),
+      answer:"東アジア"
+    },
+    {
+      question:"日本の面積に最も近いのは？",
+      choices:shuffleArray([areaText,"150,000 km²","900,000 km²","2,500,000 km²"]),
+      answer:areaText
+    },
+    {
+      question:"日本の人口に最も近いのは？",
+      choices:shuffleArray([populationText,"6,500万人","3,300万人","2億4,000万人"]),
+      answer:populationText
+    },
+    {
+      question:"日本の通貨として正しいのは？",
+      choices:shuffleArray([currency.label,"$ US Dollar (USD)","₩ South Korean won (KRW)","¥ Chinese yuan (CNY)"]),
+      answer:currency.label
+    }
   ];
 
+  return shuffleArray(baseQuestions).slice(0, 6);
 }
 
-function generateMessage(){
+function updateQuizSource(){
+  var sourceEl = document.getElementById("quizSource");
 
-  const message = `
-
-  ${randomItem(members)}より💌
-
-  <br><br>
-
-  ${randomItem(greetings)}
-
-  <br><br>
-
-  ${randomItem(timeMessages)}
-
-  <br><br>
-
-  ${randomItem(seasonMessages)}
-
-  `;
-
-  messageArea.innerHTML =
-  message;
-
-}
-
-generateMessage();
-
-setInterval(
-  generateMessage,
-  30000
-);
-
-/* 振動 */
-
-function vibratePhone(){
-
-  if(navigator.vibrate){
-
-    navigator.vibrate(40);
-
+  if(japanQuizState.fromCache){
+    sourceEl.innerHTML =
+      "取得元：<a href='" + japanQuizState.sourceUrl + "' target='_blank' rel='noopener noreferrer'>REST Countries API（Japan）</a><br>" +
+      "※ 通信失敗のため前回保存データを使用中";
+    return;
   }
 
+  sourceEl.innerHTML =
+    "取得元：<a href='" + japanQuizState.sourceUrl + "' target='_blank' rel='noopener noreferrer'>REST Countries API（Japan）</a>";
 }
 
-document
-.querySelectorAll("button")
-.forEach(btn=>{
+function renderJapanQuiz(){
+  var status = document.getElementById("quizStatus");
+  var questionEl = document.getElementById("quizQuestion");
+  var choicesEl = document.getElementById("quizChoices");
+  var resultEl = document.getElementById("quizResult");
+  var nextBtn = document.getElementById("nextQuizBtn");
 
-  btn.addEventListener(
-    "click",
-    vibratePhone
-  );
+  updateQuizSource();
 
-});
+  if(!japanQuizState.questions.length || japanQuizState.index >= japanQuizState.questions.length){
+    status.innerHTML = "終了しました✨ " + japanQuizState.questions.length + "問中 " + japanQuizState.score + "問正解";
+    questionEl.innerHTML = "🎉 日本クイズ終了です";
+    choicesEl.innerHTML = "";
+    resultEl.innerHTML = "もう一度取得すると、新しい並びで出題します。";
+    nextBtn.style.display = "none";
+    return;
+  }
+
+  var current = japanQuizState.questions[japanQuizState.index];
+
+  if(japanQuizState.fromCache){
+    status.innerHTML = "問題 " + (japanQuizState.index + 1) + " / " + japanQuizState.questions.length + "　正解 " + japanQuizState.score + "問　（前回データ使用中）";
+  }else{
+    status.innerHTML = "問題 " + (japanQuizState.index + 1) + " / " + japanQuizState.questions.length + "　正解 " + japanQuizState.score + "問";
+  }
+
+  questionEl.textContent = current.question;
+  choicesEl.innerHTML = "";
+  resultEl.innerHTML = "";
+  nextBtn.style.display = "none";
+
+  var i;
+  for(i=0;i<current.choices.length;i++){
+    var choice = current.choices[i];
+    var btn = document.createElement("button");
+    btn.className = "quizChoiceBtn";
+    btn.textContent = choice;
+    btn.onclick = (function(choiceText){
+      return function(){
+        answerJapanQuiz(choiceText);
+      };
+    })(choice);
+    choicesEl.appendChild(btn);
+  }
+}
+
+function answerJapanQuiz(selectedChoice){
+  var current = japanQuizState.questions[japanQuizState.index];
+  if(!current){ return; }
+
+  var buttons = document.querySelectorAll("#quizChoices .quizChoiceBtn");
+  var resultEl = document.getElementById("quizResult");
+  var nextBtn = document.getElementById("nextQuizBtn");
+  var i;
+
+  for(i=0;i<buttons.length;i++){
+    buttons[i].disabled = true;
+
+    if(buttons[i].textContent === current.answer){
+      buttons[i].className += " correct";
+    }else if(buttons[i].textContent === selectedChoice){
+      buttons[i].className += " wrong";
+    }
+  }
+
+  if(selectedChoice === current.answer){
+    japanQuizState.score++;
+    resultEl.innerHTML = "⭕ 正解です！";
+  }else{
+    resultEl.innerHTML = "❌ ちがいます。正解は「" + current.answer + "」です。";
+  }
+
+  nextBtn.style.display = "block";
+
+  if(japanQuizState.index === japanQuizState.questions.length - 1){
+    nextBtn.textContent = "結果を見る";
+  }else{
+    nextBtn.textContent = "次の問題へ";
+  }
+}
+
+function nextJapanQuiz(){
+  japanQuizState.index++;
+  renderJapanQuiz();
+}
+
+function loadJapanQuiz(){
+  var status = document.getElementById("quizStatus");
+  var questionEl = document.getElementById("quizQuestion");
+  var choicesEl = document.getElementById("quizChoices");
+  var resultEl = document.getElementById("quizResult");
+  var nextBtn = document.getElementById("nextQuizBtn");
+  var sourceEl = document.getElementById("quizSource");
+
+  status.innerHTML = "インターネットから日本の国データを取得しています...";
+  questionEl.innerHTML = "少し待ってください...";
+  choicesEl.innerHTML = "";
+  resultEl.innerHTML = "";
+  nextBtn.style.display = "none";
+  sourceEl.innerHTML = "";
+
+  getJSON(japanQuizState.sourceUrl, function(data){
+    try{
+      var country = data[0];
+
+      localStorage.setItem("lastJapanCountryData", JSON.stringify(country));
+
+      japanQuizState.questions = buildJapanQuizQuestions(country);
+      japanQuizState.index = 0;
+      japanQuizState.score = 0;
+      japanQuizState.fromCache = false;
+
+      renderJapanQuiz();
+    }catch(e){
+      loadJapanQuizFromCacheOrError();
+    }
+  }, function(){
+    loadJapanQuizFromCacheOrError();
+  });
+}
+
+function loadJapanQuizFromCacheOrError(){
+  var cached = localStorage.getItem("lastJapanCountryData");
+
+  if(cached){
+    try{
+      var country = JSON.parse(cached);
+
+      japanQuizState.questions = buildJapanQuizQuestions(country);
+      japanQuizState.index = 0;
+      japanQuizState.score = 0;
+      japanQuizState.fromCache = true;
+
+      renderJapanQuiz();
+      return;
+    }catch(e){}
+  }
+
+  japanQuizState.questions = [];
+  japanQuizState.index = 0;
+  japanQuizState.score = 0;
+  japanQuizState.fromCache = false;
+
+  document.getElementById("quizStatus").innerHTML = "日本クイズの取得に失敗しました";
+  document.getElementById("quizQuestion").innerHTML = "通信状態を確認して、もう一度お試しください。";
+  document.getElementById("quizResult").innerHTML = "";
+  document.getElementById("quizSource").innerHTML =
+    "取得先：<a href='" + japanQuizState.sourceUrl + "' target='_blank' rel='noopener noreferrer'>REST Countries API</a>";
+}
+
+loadJapanQuiz();
+loadWeatherByGPS();
 
 </script>
 
